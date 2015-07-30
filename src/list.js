@@ -8,7 +8,7 @@ let T = new Twitter({
 });
 
 
-let list_id = null;
+let list_id;
 
 //T.get('lists/list', {screen_name: 'akameco', reverse: true}, (err, data, response) => {
 //    if (err) {
@@ -24,23 +24,15 @@ let list_id = null;
 list_id = 106243757;
 
 T.get('lists/members', {list_id: list_id, count: 500}, (err, data, response) => {
-    console.log(data);
 
-    let user_ids = [];
+    let user_ids = data.users.map((user) => {
+        return user.id;
+    });
 
-    for (let user of data.users) {
-        console.log(user.name);
-        console.log(user.id);
-        user_ids.push(user.id);
-    }
-
-    for (let id of user_ids) {
-        console.log(id);
-    }
     console.log(user_ids.length);
 
     let userStream = T.stream('statuses/filter', {follow: user_ids.join()});
     userStream.on('tweet', (tweet) => {
-        console.log(tweet.text)
+        console.log(`${tweet.user.name}(@${tweet.user.screen_name}) ${tweet.text}`);
     });
 });
