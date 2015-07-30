@@ -33,6 +33,16 @@ T.get('lists/members', {list_id: list_id, count: 500}, (err, data, response) => 
 
     let userStream = T.stream('statuses/filter', {follow: user_ids.join()});
     userStream.on('tweet', (tweet) => {
-        console.log(`${tweet.user.name}(@${tweet.user.screen_name}) ${tweet.text}`);
+
+        // 画像があるか判定
+        if (tweet.entities.media) {
+            console.log(`${tweet.user.name}(@${tweet.user.screen_name}) ${tweet.text}`);
+            // 複数画像
+            tweet.entities.media.map((m) => {
+                console.log(m.media_url);
+            });
+            console.log("\n");
+        }
+
     });
 });
