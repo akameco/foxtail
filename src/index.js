@@ -10,6 +10,6 @@ let config = {
 let T = new Twitter(config);
 
 let userStream = T.stream('user');
-userStream.on('tweet', (tweet) => {
+uerStream.on('tweet', (tweet) => {
     console.log(tweet.text)
 });

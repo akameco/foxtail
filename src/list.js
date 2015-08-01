@@ -1,10 +1,18 @@
 "use strict";
 
 import {T} from './config';
+import {EventEmitter} from 'events';
 
+let event = new EventEmitter;
+
+event.on('data', (data) => {
+    for (let m of data) {
+        console.log(m);
+    }
+    console.log("\n");
+});
 
 let list_id = 106243757;
-
 T.get('lists/members', {list_id: list_id, count: 5000}, (err, data, response) => {
 
     let user_ids = data.users.map((user) => {
@@ -19,18 +27,21 @@ T.get('lists/members', {list_id: list_id, count: 5000}, (err, data, response) =>
             return;
         }
 
+        let obj = {};
+
         // 画像があるか判定
-        if (tweet.entities.media) {
-
-            console.log(`${tweet.user.name}(@${tweet.user.screen_name}) ${tweet.text}`);
-
-            console.log(tweet.entities.media.length);
+        if (tweet.extended_entities) {
+            obj['name'] = tweet.user.name;
+            obj['screen_name'] = tweet.user.screen_name;
 
             // 複数画像
-            for (let media of tweet.entities.media) {
-                console.log(media)
+            obj['media']
+            for (let media of tweet.extended_entities.media) {
+
+                str.push(media.media_url);
             }
-            console.log("\n");
+
+            event.emit('data', str);
         }
 
     });

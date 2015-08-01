@@ -4,8 +4,8 @@ import {T} from './config';
 
 //T.get('lists/list', {screen_name: screen_name, reverse: true}, (err, data, response) => {
 //
-//    if (err) {
-//        console.log(err);
+//    if (err)
+//        cons
 //    }
 //
 //    for (let list of data) {
