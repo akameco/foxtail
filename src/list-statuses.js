@@ -98,6 +98,12 @@ class Response {
   get media() {
     return this.msg.media;
   }
+
+  // TODO: 各アクションの実装
+  reply() {}
+  retweet() {}
+  favo() {}
+  download(path) {}
 }
 
 // メイン関数
@@ -124,6 +130,7 @@ class Momonic {
 
   // TODO: ファイルからプラグインのロード
   load() { }
+  // TODO: 初期化処理
   run() { }
 }
 
@@ -146,13 +153,4 @@ momo.push((res) => {
 });
 
 let tl = new ListTimeline(momo);
-
-// tl.on('tweet', (data) => {
-  // console.log(`@${data.screen_name}`);
-  // console.log(data.text);
-  // for (let o of data['media']) {
-    // console.log(o);
-  // }
-// });
-
 tl.run();
