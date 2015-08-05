@@ -48,10 +48,6 @@ class TimeLine extends EventEmitter {
 }
 
 class ListTimeLine extends TimeLine {
-    constructor(momo) {
-        super(momo);
-    }
-
     run() {
         T.get('lists/statuses', {list_id: this.list_id, count: this.count}, (err, data, response) => {
             if (err) {
@@ -67,10 +63,6 @@ class ListTimeLine extends TimeLine {
 }
 
 class StreamingListTimeLine extends TimeLine {
-    constructor(momo) {
-        super(momo);
-    }
-
     // TODO: ネストを浅くする
     run() {
         T.get('lists/members', {list_id: this.list_id, count: 5000}, (err, data, response) => {
