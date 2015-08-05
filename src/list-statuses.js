@@ -24,32 +24,35 @@ class Timeline extends EventEmitter {
     return tweet.extended_entities ? true : false;
   }
 
-  run() {
-    T.get('lists/statuses',
-        {list_id: this.list_id, count: this.count}, (err, data, response) => {
+  // TODO: ツイートのjsonを整形せずそのまま渡す
+  // ツイートオブジェクトを整形し新しいObjectとして渡す
+  formatTweet(tweet) {
+    let obj = {
+      id: tweet.id,
+      user_id: tweet.user.id,
+      username: tweet.user.name,
+      screen_name: tweet.user.screen_name,
+      text: tweet.text,
+      media: []
+    };
 
+    // 複数画像
+    for (let media of tweet.extended_entities.media) {
+      obj['media'].push(media.media_url);
+    }
+
+    return obj;
+  }
+
+  run() {
+    T.get('lists/statuses', {list_id: this.list_id, count: this.count}, (err, data, response) => {
       if (err) {
         console.log(err);
       }
 
       for (let tweet of data) {
         if(!this.filter(tweet)) continue;
-
-        let obj = {
-          id: tweet.id,
-          user_id: tweet.user.id,
-          username: tweet.user.name,
-          screen_name: tweet.user.screen_name,
-          text: tweet.text,
-          media: []
-        };
-
-        // 複数画像
-        for (let media of tweet.extended_entities.media) {
-          obj['media'].push(media.media_url);
-        }
-
-        this.momo.receive(obj);
+        this.momo.receive(this.formatTweet(tweet));
       }
     });
   }
