@@ -11,7 +11,6 @@ export let T = new Twitter({
 });
 
 class Timeline extends EventEmitter {
-
   constructor (momo) {
     super();
     this.momo = momo;
@@ -42,6 +41,14 @@ class Timeline extends EventEmitter {
     }
 
     return obj;
+  }
+
+  run() {}
+}
+
+class ListTimeline extends Timeline {
+  constructor (momo) {
+    super(momo);
   }
 
   run() {
@@ -138,7 +145,7 @@ momo.push((res) => {
   }
 });
 
-let tl = new Timeline(momo);
+let tl = new ListTimeline(momo);
 
 // tl.on('tweet', (data) => {
   // console.log(`@${data.screen_name}`);
