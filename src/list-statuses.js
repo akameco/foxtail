@@ -19,6 +19,11 @@ class Timeline extends EventEmitter {
     this.list_id = this.momo.list_id;
   }
 
+  // 画像のないツイートを取り除く
+  filter(tweet) {
+    return tweet.extended_entities ? true : false;
+  }
+
   run() {
     T.get('lists/statuses',
         {list_id: this.list_id, count: this.count}, (err, data, response) => {
@@ -28,24 +33,23 @@ class Timeline extends EventEmitter {
       }
 
       for (let tweet of data) {
-        if (tweet.extended_entities) {
-          let obj = {
-            id: tweet.id,
-            user_id: tweet.user.id,
-            username: tweet.user.name,
-            screen_name: tweet.user.screen_name,
-            text: tweet.text,
-            media: []
-          };
+        if(!this.filter(tweet)) continue;
 
-          // 複数画像
-          for (let media of tweet.extended_entities.media) {
-            obj['media'].push(media.media_url);
-          }
+        let obj = {
+          id: tweet.id,
+          user_id: tweet.user.id,
+          username: tweet.user.name,
+          screen_name: tweet.user.screen_name,
+          text: tweet.text,
+          media: []
+        };
 
-          // this.emit('tweet', obj);
-          this.momo.receive(obj);
+        // 複数画像
+        for (let media of tweet.extended_entities.media) {
+          obj['media'].push(media.media_url);
         }
+
+        this.momo.receive(obj);
       }
     });
   }
