@@ -1,27 +1,20 @@
-import fs from 'fs';
-import http from 'http';
+"use strict";
+import Fs from 'fs';
+import Path from 'path';
+import url from 'url';
+import request from 'request';
 
+// 画像を保存する
 export default (momo) => {
-    let i = 1;
     momo.add((res) => {
-        for (let image of res.media) {
-            let outFile = fs.createWriteStream(i++ + '.jpg');
-            console.log('saving image ...');
+        for (let image_url of res.media) {
+            console.log(`saving ${res.username}'s image`);
 
-            let url = image;
+            let filename = url.parse(image_url).pathname.split('/').pop();
+            let save_path = Path.join('./img', filename);
 
-            let req = http.get(url, (res) => {
-                // ダウンロードした内容をそのまま、ファイル書き出し。
-                res.pipe(outFile);
-                // 終わったらファイルストリームをクローズ。
-                res.on('end', function () {
-                    outFile.close();
-                });
-            });
-
-            req.on('error', (err) => {
-                console.log('Error: ', err);
-                return;
+            request(image_url).pipe(Fs.createWriteStream(save_path)).on('close', ()=> {
+                console.log(`${res.username}'s image saved`);
             });
         }
     });

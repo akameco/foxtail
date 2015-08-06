@@ -71,3 +71,4 @@ node_modules
 .envrc
 bundle.js
 ignore/
+src/img/

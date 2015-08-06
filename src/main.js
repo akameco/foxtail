@@ -59,6 +59,6 @@ class Momonic {
 
 let momo = new Momonic();
 
-let tl = new ListTimeLine(momo);
-// let tl = new StreamingListTimeLine(momo);
+// let tl = new ListTimeLine(momo);
+let tl = new StreamingListTimeLine(momo);
 tl.run();
