@@ -70,3 +70,4 @@ node_modules
 .idea/
 .envrc
 bundle.js
+ignore/
