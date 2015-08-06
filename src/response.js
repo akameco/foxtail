@@ -11,6 +11,10 @@ export default class Response {
         return this.msg.username;
     }
 
+    get screen_name() {
+        return this.msg.screen_name;
+    }
+
     get text() {
         return this.msg.text;
     }
