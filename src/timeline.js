@@ -30,8 +30,10 @@ export class TimeLine extends EventEmitter {
         };
 
         // 複数画像
-        for (let media of tweet.extended_entities.media) {
-            obj['media'].push(media.media_url);
+        if (tweet.extended_entities) {
+            for (let media of tweet.extended_entities.media) {
+                obj['media'].push(media.media_url);
+            }
         }
 
         return obj;
@@ -72,6 +74,18 @@ export class StreamingListTimeLine extends TimeLine {
                     this.momo.receive(this.formatTweet(tweet));
                 }
             });
+        });
+    }
+}
+
+export class PublicTimeLine extends TimeLine {
+    run() {
+        let userStream = T.stream('user');
+        userStream.on('tweet', (tweet) => {
+            // RTされたツイート及び画像のないツイートを取り除く
+            //if (this.filter(tweet)) {
+            this.momo.receive(tweet);
+            //}
         });
     }
 }
