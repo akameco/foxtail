@@ -10,7 +10,7 @@ export default class Listener {
         this.cb = cb;
     }
 
-    call(msg) {
-        this.cb(new Response(this.momo, msg));
+    call(tweet) {
+        this.cb(new Response(this.momo, tweet));
     }
 }
