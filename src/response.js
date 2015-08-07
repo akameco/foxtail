@@ -26,14 +26,13 @@ export default class Response {
         let images = [];
         // 複数画像
         if (this.tweet.extended_entities) {
-            for (let m of tweet.extended_entities.media) {
+            for (let m of this.tweet.extended_entities.media) {
                 images.push(m.media_url);
             }
         }
         return images;
     }
 
-    // TODO: 各アクションの実装
     reply(msg) {
         this.momo.action.reply(this.tweet, msg);
     }
@@ -46,6 +45,7 @@ export default class Response {
         this.momo.action.favorite(this.tweet);
     }
 
-    download(path) {
+    download_images(path) {
+        this.momo.action.download_images(this.images, this.tweet, path);
     }
 }
