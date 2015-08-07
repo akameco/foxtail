@@ -39,7 +39,7 @@ export default class Response {
     }
 
     retweet() {
-        this.momo.action.retweet();
+        this.momo.action.retweet(this.tweet);
     }
 
     favo() {
