@@ -17,28 +17,6 @@ export class TimeLine extends EventEmitter {
         return tweet.extended_entities ? true : false;
     }
 
-    // TODO: ツイートのjsonを整形せずそのまま渡す
-    // ツイートオブジェクトを整形し新しいObjectとして渡す
-    formatTweet(tweet) {
-        let obj = {
-            id: tweet.id,
-            user_id: tweet.user.id,
-            username: tweet.user.name,
-            screen_name: tweet.user.screen_name,
-            text: tweet.text,
-            media: []
-        };
-
-        // 複数画像
-        if (tweet.extended_entities) {
-            for (let media of tweet.extended_entities.media) {
-                obj['media'].push(media.media_url);
-            }
-        }
-
-        return obj;
-    }
-
     run() {
     }
 }
