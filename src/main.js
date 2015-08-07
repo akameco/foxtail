@@ -6,7 +6,7 @@ import Twitter from 'twit';
 import T from './config';
 import Response from './response';
 import Listener from './listener';
-import {StreamingListTimeLine,ListTimeLine} from './timeline';
+import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline';
 
 class Momonic {
     listeners = [];
@@ -24,9 +24,9 @@ class Momonic {
     }
 
     // 登録されている全てのリスナを実行する
-    receive(msg) {
+    receive(tweet) {
         for (let listener of this.listeners) {
-            listener.call(msg);
+            listener.call(tweet);
         }
     }
 
@@ -60,5 +60,6 @@ class Momonic {
 let momo = new Momonic();
 
 // let tl = new ListTimeLine(momo);
-let tl = new StreamingListTimeLine(momo);
+//let tl = new StreamingListTimeLine(momo);
+let tl = new PublicTimeLine(momo);
 tl.run();
