@@ -7,6 +7,10 @@ import request from 'request';
 // 画像を保存する
 export default (momo) => {
     momo.add((res) => {
+        if (!res.media || res.media === []) {
+            return
+        }
+
         for (let image_url of res.media) {
             console.log(`saving ${res.username}'s image`);
 
