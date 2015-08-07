@@ -6,6 +6,7 @@ import Twitter from 'twit';
 import T from './config';
 import Response from './response';
 import Listener from './listener';
+import Action from './action';
 import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline';
 
 class Momonic {
@@ -15,6 +16,7 @@ class Momonic {
     constructor(count = 50, list_id = 106243757) {
         this.count = count;
         this.list_id = list_id;
+        this.action = new Action(this);
         this.load();
     }
 
@@ -61,5 +63,6 @@ let momo = new Momonic();
 
 // let tl = new ListTimeLine(momo);
 //let tl = new StreamingListTimeLine(momo);
+
 let tl = new PublicTimeLine(momo);
 tl.run();
