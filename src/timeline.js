@@ -52,7 +52,7 @@ export class ListTimeLine extends TimeLine {
 
             for (let tweet of data) {
                 if (!this.filter(tweet)) continue;
-                this.momo.receive(this.formatTweet(tweet));
+                this.momo.receive(tweet);
             }
         });
     }
@@ -71,7 +71,7 @@ export class StreamingListTimeLine extends TimeLine {
             userStream.on('tweet', (tweet) => {
                 // RTされたツイート及び画像のないツイートを取り除く
                 if (this.filter(tweet) && user_ids.indexOf(tweet.user.id) !== -1) {
-                    this.momo.receive(this.formatTweet(tweet));
+                    this.momo.receive(tweet);
                 }
             });
         });
