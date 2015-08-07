@@ -29,7 +29,10 @@ export default class Action {
         });
     }
 
-    favo(tweet) {
+    favorite(tweet) {
+        T.post('favorites/create', {id: tweet.id_str}, (err, data)=> {
+            console.log(data);
+        });
     }
 
     download(path) {

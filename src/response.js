@@ -42,8 +42,8 @@ export default class Response {
         this.momo.action.retweet(this.tweet);
     }
 
-    favo() {
-        this.momo.action.favo();
+    favorite() {
+        this.momo.action.favorite(this.tweet);
     }
 
     download(path) {
