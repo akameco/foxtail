@@ -1,3 +1,4 @@
+"use strict";
 // レスポンスクラス
 // イベントが発生すると作られる
 
@@ -8,6 +9,7 @@ export default class Response {
         this.tweet = tweet;
     }
 
+    // 頻繁に利用されるオブジェクトは直接取得できるようにする
     get username() {
         return this.tweet.user.name;
     }
@@ -20,7 +22,7 @@ export default class Response {
         return this.tweet.text;
     }
 
-    get media() {
+    get images() {
         let images = [];
         // 複数画像
         if (this.tweet.extended_entities) {
@@ -32,13 +34,16 @@ export default class Response {
     }
 
     // TODO: 各アクションの実装
-    reply() {
+    reply(msg) {
+        this.momo.action.reply(this.tweet, msg);
     }
 
     retweet() {
+        this.momo.action.retweet();
     }
 
     favo() {
+        this.momo.action.favo();
     }
 
     download(path) {
