@@ -32,11 +32,26 @@ class Momonic {
         }
     }
 
+    // TODO 処理を分割
     load() {
+        let loadScripts = Path.resolve('.', 'scripts.json');
+        let scripts = [];
+        if (Fs.existsSync(loadScripts)) {
+            // TODO 非同期読み込み
+            let data = Fs.readFileSync(loadScripts);
+            try {
+                scripts = JSON.parse(data);
+            } catch (e) {
+                process.exit(0);
+            }
+        }
+
         let path = Path.resolve(__dirname, './plugin');
         Fs.readdir(path, (err, list) => {
             for (let file of list) {
-                this.loadScript(path, file);
+                if (scripts.indexOf(Path.basename(file, '.js')) !== -1) {
+                    this.loadScript(path, file);
+                }
             }
         });
     }
@@ -62,7 +77,6 @@ class Momonic {
 let momo = new Momonic();
 
 // let tl = new ListTimeLine(momo);
-//let tl = new StreamingListTimeLine(momo);
-
+// let tl = new StreamingListTimeLine(momo);
 let tl = new PublicTimeLine(momo);
 tl.run();
