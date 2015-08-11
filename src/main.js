@@ -13,10 +13,11 @@ export default class Momonic {
     listeners = [];
 
     // TODO: リストのidを選択可能にする
-    constructor(count = 50, list_id = 106243757) {
+    constructor(timeline = PublicTimeLine, count = 50, list_id = 106243757) {
         this.count = count;
         this.list_id = list_id;
         this.action = new Action(this);
+        this.timeline = new timeline(this);
         this.load();
     }
 
@@ -71,6 +72,7 @@ export default class Momonic {
 
     // TODO: 初期化処理
     run() {
+        this.timeline.run();
     }
 }
 
