@@ -9,7 +9,7 @@ import Listener from './listener';
 import Action from './action';
 import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline';
 
-class Momonic {
+export default class Momonic {
     listeners = [];
 
     // TODO: リストのidを選択可能にする
@@ -74,9 +74,3 @@ class Momonic {
     }
 }
 
-let momo = new Momonic();
-
-// let tl = new ListTimeLine(momo);
-// let tl = new StreamingListTimeLine(momo);
-let tl = new PublicTimeLine(momo);
-tl.run();
