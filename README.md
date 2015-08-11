@@ -2,7 +2,7 @@
 
 みこーん。
 
-Twitter BOT for node.
+Twitter BOT for node.  
 You can easily add plugin.
 
 ## Installation
@@ -17,7 +17,7 @@ Requirements:
 
 ## Example
 
-1. Add plugin
+### 1. Add plugin
 
 ```
 $ echo '["nullpo"]' > scripts.json
@@ -25,6 +25,7 @@ $ mkdir plugin
 ```
 
 plugin/nullpo.js
+
 ```js
 export default (fox) => {
     fox.add((res) => {
@@ -35,16 +36,18 @@ export default (fox) => {
 }
 ```
 
-2. Setup FoxTail.
+### 2. Setup FoxTail.
 
 main.js
+
 ```js
 import FoxTail from 'foxtail'
 let fox = new FoxTail();
 fox.run();
 ```
 
-3. Run
+### 3. Run
+
 ```
 $ babel-node --stage 0 -- main.js
 ```
