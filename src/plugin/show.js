@@ -1,5 +1,5 @@
-export default (momo) => {
-    momo.add((res) => {
+export default (fox) => {
+    fox.add((res) => {
         let name = res.username;
         let screen_name = res.screen_name;
         let text = res.text;

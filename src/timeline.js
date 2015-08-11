@@ -5,11 +5,11 @@ import T from './config';
 import {EventEmitter} from 'events';
 
 export class TimeLine extends EventEmitter {
-    constructor(momo) {
+    constructor(fox) {
         super();
-        this.momo = momo;
-        this.count = this.momo.count;
-        this.list_id = this.momo.list_id;
+        this.fox = fox;
+        this.count = this.fox.count;
+        this.list_id = this.fox.list_id;
     }
 
     // 画像のないツイートを取り除く
@@ -30,7 +30,7 @@ export class ListTimeLine extends TimeLine {
 
             for (let tweet of data) {
                 if (!this.filter(tweet)) continue;
-                this.momo.receive(tweet);
+                this.fox.receive(tweet);
             }
         });
     }
@@ -49,7 +49,7 @@ export class StreamingListTimeLine extends TimeLine {
             userStream.on('tweet', (tweet) => {
                 // RTされたツイート及び画像のないツイートを取り除く
                 if (this.filter(tweet) && user_ids.indexOf(tweet.user.id) !== -1) {
-                    this.momo.receive(tweet);
+                    this.fox.receive(tweet);
                 }
             });
         });
@@ -62,7 +62,7 @@ export class PublicTimeLine extends TimeLine {
         userStream.on('tweet', (tweet) => {
             // RTされたツイート及び画像のないツイートを取り除く
             //if (this.filter(tweet)) {
-            this.momo.receive(tweet);
+            this.fox.receive(tweet);
             //}
         });
     }

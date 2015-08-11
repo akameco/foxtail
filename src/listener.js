@@ -3,14 +3,14 @@
 import Response from './response';
 
 export default class Listener {
-    // momo メイン
+    // fox メイン
     // cb コールバック関数
-    constructor(momo, cb) {
-        this.momo = momo;
+    constructor(fox, cb) {
+        this.fox = fox;
         this.cb = cb;
     }
 
     call(tweet) {
-        this.cb(new Response(this.momo, tweet));
+        this.cb(new Response(this.fox, tweet));
     }
 }

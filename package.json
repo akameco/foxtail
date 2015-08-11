@@ -1,8 +1,8 @@
 {
-  "name": "twitter-client",
+  "name": "foxtail",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "gulp",
     "example": "babel-node example/main.js",

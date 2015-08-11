@@ -1,5 +1,5 @@
-import Momonic from '../src/main'
+import FoxTail from '../src/main'
 import {PublicTimeLine} from '../src/timeline'
 
-let momo = new Momonic(PublicTimeLine);
-momo.run();
+let fox = new FoxTail(PublicTimeLine);
+fox.run();

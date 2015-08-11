@@ -9,7 +9,7 @@ import Listener from './listener';
 import Action from './action';
 import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline';
 
-export default class Momonic {
+export default class FoxTail {
     listeners = [];
 
     // TODO: リストのidを選択可能にする

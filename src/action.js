@@ -7,8 +7,8 @@ import Url from 'url';
 
 export default class Action {
 
-    constructor(momo) {
-        this.momo = momo;
+    constructor(fox) {
+        this.fox = fox;
     }
 
     // TODO 各アクションの実装

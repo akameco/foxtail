@@ -4,8 +4,8 @@
 
 export default class Response {
 
-    constructor(momo, tweet) {
-        this.momo = momo;
+    constructor(fox, tweet) {
+        this.fox = fox;
         this.tweet = tweet;
     }
 
@@ -34,18 +34,18 @@ export default class Response {
     }
 
     reply(msg) {
-        this.momo.action.reply(this.tweet, msg);
+        this.fox.action.reply(this.tweet, msg);
     }
 
     retweet() {
-        this.momo.action.retweet(this.tweet);
+        this.fox.action.retweet(this.tweet);
     }
 
     favorite() {
-        this.momo.action.favorite(this.tweet);
+        this.fox.action.favorite(this.tweet);
     }
 
     download_images(path) {
-        this.momo.action.download_images(this.images, this.tweet, path);
+        this.fox.action.download_images(this.images, this.tweet, path);
     }
 }
