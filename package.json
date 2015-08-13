@@ -4,11 +4,10 @@
   "description": "Twitter BOT for node. You can easily add plugin.",
   "main": "src/main.js",
   "scripts": {
-    "start": "gulp",
     "example": "babel-node example/main.js",
-    "server": "http-server",
-    "build": "browserify index.js -t babelify -o bundle.js -d",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir lib --source-maps inline",
+    "watch": "babel src --out-dir lib --watch --source-maps inline",
+    "test": "npm run build && mocha test/**/*.js"
   },
   "author": "akameco",
   "homepage": "https://github.com/akameco/foxtail",
