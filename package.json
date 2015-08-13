@@ -15,6 +15,10 @@
     "type": "git",
     "url": "https://github.com/akameco/foxtail.git"
   },
+  "main": "lib/main.js",
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "dependencies": {
     "request": "^2.60.0",
