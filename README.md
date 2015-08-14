@@ -11,45 +11,43 @@ You can easily add plugin.
 npm install foxtail
 ```
 
-Requirements:
-- babel
-
-
 ## Example
 
-### 1. Add plugin
+### 1. Set keys
+
+Set your keys.
 
 ```
-$ echo '["nullpo"]' > scripts.json
-$ mkdir plugin
-```
-
-plugin/nullpo.js
-
-```js
-export default (fox) => {
-    fox.add((res) => {
-        if (res.text === 'ぬるぽ') {
-            fox.reply('ガッ');
-        }
-    });
-}
+$ export CONSUMER_KEY= ...
+$ export CONSUMER_SECRET= ...
+$ export ACCESS_TOKEN= ...
+$ export ACCESS_TOKEN_SECRET= ...
 ```
 
 ### 2. Setup FoxTail.
-
 main.js
 
 ```js
-import FoxTail from 'foxtail'
-let fox = new FoxTail();
+var FoxTail = require('foxtail');
+var fox = new FoxTail();
+
+// show timeline
+fox.add(function (res) {
+    console.log("@" + res.screen_name + "(" + res.name + ") " + res.text + "\n");
+});
+
+// reply to words
+fox.add(function (res) {
+    if (res.text === 'ぬるぽ') fox.reply('ガッ');
+});
+
 fox.run();
 ```
 
 ### 3. Run
 
 ```
-$ babel-node --stage 0 -- main.js
+$ node main.js
 ```
 
 ## Development

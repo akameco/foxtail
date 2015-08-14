@@ -11,14 +11,18 @@ import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline';
 
 export default class FoxTail {
     listeners = [];
+    timelineTable = {
+      "public": PublicTimeLine,
+      "list": StreamingListTimeLine
+    };
 
     // TODO: リストのidを選択可能にする
-    constructor(timeline = PublicTimeLine, count = 50, list_id = 106243757) {
+    constructor(timeline = 'public', count = 50, list_id = 106243757) {
         this.count = count;
         this.list_id = list_id;
         this.action = new Action(this);
         // TODO: タイムラインの決定を柔軟に
-        this.timeline = new timeline(this);
+        this.timeline = new this.timelineTable[timeline](this);
         this.load();
     }
 
@@ -76,6 +80,3 @@ export default class FoxTail {
         this.timeline.run();
     }
 }
-
-// TODO: もっといい方法
-export {StreamingListTimeLine,ListTimeLine,PublicTimeLine}

@@ -1,12 +1,8 @@
-import FoxTail from '../lib/foxtail'
+var FoxTail = require('../lib/foxtail');
+var fox = new FoxTail('public');
 
-let fox = new FoxTail();
-
-fox.add((res) => {
-  let name = res.username;
-  let screen_name = res.screen_name;
-  let text = res.text;
-  console.log(`@${screen_name}(${name}) ${text}\n`);
+fox.add(function (res) {
+  console.log("@" + res.screen_name + "(" + res.name + ") " + res.text + "\n");
 });
 
 fox.run();

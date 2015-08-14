@@ -1,14 +1,13 @@
 {
   "name": "foxtail",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Twitter BOT for node. You can easily add plugin.",
-  "scripts": {
-    "example": "babel-node example/main.js",
-    "build": "babel src --out-dir lib --source-maps inline",
-    "watch": "babel src --out-dir lib --watch --source-maps inline",
-    "test": "npm run build && mocha test/**/*.js"
-  },
   "author": "akameco",
+  "keywords": [
+    "twitter",
+    "streaming"
+  ],
+  "license": "MIT",
   "homepage": "https://github.com/akameco/foxtail",
   "repository": {
     "type": "git",
@@ -18,7 +17,12 @@
   "files": [
     "lib"
   ],
-  "license": "MIT",
+  "scripts": {
+    "example": "node example/main.js",
+    "build": "babel src --out-dir lib --source-maps inline",
+    "watch": "babel src --out-dir lib --watch --source-maps inline",
+    "test": "npm run build && mocha test/**/*.js"
+  },
   "dependencies": {
     "request": "^2.60.0",
     "twit": "^2.1.0"
