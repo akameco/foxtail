@@ -17,6 +17,7 @@ export default class FoxTail {
         this.count = count;
         this.list_id = list_id;
         this.action = new Action(this);
+        // TODO: タイムラインの決定を柔軟に
         this.timeline = new timeline(this);
         this.load();
     }
@@ -76,3 +77,5 @@ export default class FoxTail {
     }
 }
 
+// TODO: もっといい方法
+export {StreamingListTimeLine,ListTimeLine,PublicTimeLine}

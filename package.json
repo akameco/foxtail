@@ -1,8 +1,7 @@
 {
   "name": "foxtail",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Twitter BOT for node. You can easily add plugin.",
-  "main": "src/main.js",
   "scripts": {
     "example": "babel-node example/main.js",
     "build": "babel src --out-dir lib --source-maps inline",
@@ -15,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/akameco/foxtail.git"
   },
-  "main": "lib/main.js",
+  "main": "lib/foxtail.js",
   "files": [
     "lib"
   ],
