@@ -33,6 +33,10 @@ export default class Response {
         return images;
     }
 
+    post(msg) {
+        this.fox.action.post(msg);
+    }
+
     reply(msg) {
         this.fox.action.reply(this.tweet, msg);
     }

@@ -11,36 +11,60 @@ export default class Action {
         this.fox = fox;
     }
 
-    // TODO 各アクションの実装
-    // ポストする
+    /**
+     * Twitterに投稿する
+     * Twit#post('statues/update', {status: msg})
+     * @param msg
+     */
     post(msg) {
+        T.post('statuses/update', {
+            status: msg
+        }, (err, data) => {
+        });
     }
 
     // 相手にリプライを返す
     // TODO ログ
+    /**
+     * リプライを返す
+     * @param tweet
+     * @param msg
+     */
     reply(tweet, msg) {
         T.post('statuses/update', {
             in_reply_to_status_id: tweet.id_str,
             status: `@${tweet.user.screen_name} ${msg}`
         }, (err, data) => {
-            console.log(data)
         });
     }
 
+    /**
+     * リツートをする
+     * @param tweet
+     */
     retweet(tweet) {
         T.post('statuses/retweet/:id', {id: tweet.id_str}, (err, data)=> {
-            console.log(data);
         });
     }
 
+    /**
+     * ふぉぼる
+     * @param tweet
+     */
     favorite(tweet) {
         T.post('favorites/create', {id: tweet.id_str}, (err, data)=> {
-            console.log(data);
         });
     }
 
     // TODO optionを設定して
-    // パスの場所に画像を保存する
+    /**
+     * 対象のパスに画像を保存する
+     * @param images
+     * @param tweet
+     * @param path
+     * @param option
+     * @returns {boolean}
+     */
     download_images(images, tweet, path, option = {}) {
         if (images.length === 0) {
             return false;
