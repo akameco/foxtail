@@ -24,7 +24,6 @@ export default class FoxTail {
     constructor(timeline = 'public', options = {}) {
         this.action = new Action(this);
         this._setTimeline(timeline, options);
-        this.load();
     }
 
     get twit() {
@@ -73,27 +72,21 @@ export default class FoxTail {
     }
 
     // TODO 処理を分割
-    load() {
-        let loadScripts = Path.resolve('.', 'scripts.json');
-        let scripts = [];
-        if (Fs.existsSync(loadScripts)) {
-            // TODO 非同期読み込み
-            let data = Fs.readFileSync(loadScripts);
-            try {
-                scripts = JSON.parse(data);
-            } catch (e) {
-                process.exit(0);
-            }
-        }
-
-        let path = Path.resolve(__dirname, './plugin');
-        Fs.readdir(path, (err, list) => {
-            for (let file of list) {
-                if (scripts.indexOf(Path.basename(file, '.js')) !== -1) {
+    /**
+     * プラグインの読み込み
+     * @param path
+     */
+    load(path) {
+        if (Fs.existsSync(path)) {
+            Fs.readdir(path, (err, list) => {
+                for (let file of list) {
                     this.loadScript(path, file);
                 }
-            }
-        });
+            });
+        } else {
+            console.log('Could not read file');
+            process.exit(1);
+        }
     }
 
     /**
