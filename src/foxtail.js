@@ -26,6 +26,10 @@ export default class FoxTail {
         this.load();
     }
 
+    get twit() {
+      return T;
+    }
+
     // リスナを登録する
     add(cb) {
         this.listeners.push(new Listener(this, cb));
