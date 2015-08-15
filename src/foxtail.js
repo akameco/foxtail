@@ -10,32 +10,62 @@ import Action from './action';
 import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline';
 
 export default class FoxTail {
+    /**
+     * プラグインを発火するリスナ
+     * @type {Array}
+     */
     listeners = [];
-    timelineTable = {
-      "public": PublicTimeLine,
-      "list": StreamingListTimeLine
-    };
 
-    // TODO: リストのidを選択可能にする
-    constructor(timeline = 'public', count = 50, list_id = 106243757) {
-        this.count = count;
-        this.list_id = list_id;
+    /**
+     * タイムラインを選択する
+     * @param timeline
+     * @param options
+     */
+    constructor(timeline = 'public', options = {}) {
         this.action = new Action(this);
-        // TODO: タイムラインの決定を柔軟に
-        this.timeline = new this.timelineTable[timeline](this);
+        this._setTimeline(timeline, options);
         this.load();
     }
 
     get twit() {
-      return T;
+        return T;
     }
 
-    // リスナを登録する
+    /**
+     * タイムラインをセット
+     * @param timeline
+     * @param options
+     * @private
+     */
+    _setTimeline(timeline, options) {
+        let timelineTable = {
+            "public": PublicTimeLine,
+            "stream/list": StreamingListTimeLine,
+            "list": ListTimeLine
+        };
+        this.timeline = new timelineTable[timeline](this, options);
+    }
+
+    /**
+     * ツイッターに投稿する
+     * @param msg
+     */
+    post(msg) {
+        this.action.post(msg);
+    }
+
+    /**
+     * リスナを登録する
+     * @param cb
+     */
     add(cb) {
         this.listeners.push(new Listener(this, cb));
     }
 
-    // 登録されている全てのリスナを実行する
+    /**
+     * 登録されている全てのリスナを実行する
+     * @param tweet
+     */
     receive(tweet) {
         for (let listener of this.listeners) {
             listener.call(tweet);
@@ -66,6 +96,11 @@ export default class FoxTail {
         });
     }
 
+    /**
+     * プラグインを読み込む
+     * @param path
+     * @param file
+     */
     loadScript(path, file) {
         let ext = Path.extname(file);
         let full = Path.join(path, Path.basename(file, ext));
@@ -79,7 +114,9 @@ export default class FoxTail {
         }
     }
 
-    // TODO: 初期化処理
+    /**
+     * 実行
+     */
     run() {
         this.timeline.run();
     }

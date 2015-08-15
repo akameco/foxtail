@@ -8,8 +8,6 @@ export class TimeLine extends EventEmitter {
     constructor(fox) {
         super();
         this.fox = fox;
-        this.count = this.fox.count;
-        this.list_id = this.fox.list_id;
     }
 
     // 画像のないツイートを取り除く
@@ -22,6 +20,12 @@ export class TimeLine extends EventEmitter {
 }
 
 export class ListTimeLine extends TimeLine {
+    constructor(fox, {list_id = 106243757, count = 50}) {
+        super(fox);
+        this.list_id = list_id;
+        this.count = count;
+    }
+
     run() {
         T.get('lists/statuses', {list_id: this.list_id, count: this.count}, (err, data, response) => {
             if (err) {
@@ -37,6 +41,11 @@ export class ListTimeLine extends TimeLine {
 }
 
 export class StreamingListTimeLine extends TimeLine {
+    constructor(fox, {list_id = 106243757}) {
+        super(fox);
+        this.list_id = list_id;
+    }
+
     // TODO: ネストを浅くする
     run() {
         T.get('lists/members', {list_id: this.list_id, count: 5000}, (err, data, response) => {
