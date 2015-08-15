@@ -18,7 +18,7 @@
     "lib"
   ],
   "scripts": {
-    "example": "node example/main.js",
+    "example": "node example/index.js",
     "build": "babel src --out-dir lib --source-maps inline",
     "watch": "babel src --out-dir lib --watch --source-maps inline",
     "test": "npm run build && mocha test/**/*.js"
@@ -28,6 +28,7 @@
     "twit": "^2.1.0"
   },
   "devDependencies": {
+    "babel": "^5.8.21",
     "babelify": "^6.1.3",
     "browserify": "^11.0.1",
     "gulp": "^3.9.0",
