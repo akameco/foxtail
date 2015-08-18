@@ -56,30 +56,30 @@ export default class Action {
         });
     }
 
-    // TODO optionを設定して
+
+    // TODO 保存する画像のファイル名を任意に設定可能にする
     /**
      * 対象のパスに画像を保存する
      * @param images
      * @param tweet
      * @param path
-     * @param option
-     * @returns {boolean}
+     * @param cb
      */
-    download_images(images, tweet, path, option = {}) {
+    download_images(images, tweet, path, cb) {
         if (images.length === 0) {
-            return false;
+            return
         }
 
         for (let image_url of images) {
             let filename = Path.basename(Url.parse(image_url).pathname);
-            let save_path = Path.join(path, filename);
+            let savePath = Path.join(path, filename);
             Request(image_url)
-                .pipe(Fs.createWriteStream(save_path))
+                .pipe(Fs.createWriteStream(savePath))
                 .on('close', ()=> {
-                    // TODO ログ
-                    console.log('image saved');
+                    if (typeof cb === 'function') {
+                        cb(savePath);
+                    }
                 });
         }
-        return true;
     }
 }

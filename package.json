@@ -1,6 +1,6 @@
 {
   "name": "foxtail",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Twitter BOT for node. You can easily add plugin.",
   "author": "akameco",
   "keywords": [
@@ -18,10 +18,10 @@
     "lib"
   ],
   "scripts": {
-    "example": "node example/index.js",
     "build": "babel src --out-dir lib --source-maps inline",
     "watch": "babel src --out-dir lib --watch --source-maps inline",
-    "test": "npm run build && mocha test/**/*.js"
+    "test": "npm run build && mocha test/**/*.js",
+    "example": "node example/index.js"
   },
   "dependencies": {
     "request": "^2.60.0",

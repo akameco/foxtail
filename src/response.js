@@ -10,7 +10,7 @@ export default class Response {
     }
 
     // 頻繁に利用されるオブジェクトは直接取得できるようにする
-    get username() {
+    get user_name() {
         return this.tweet.user.name;
     }
 
@@ -49,7 +49,7 @@ export default class Response {
         this.fox.action.favorite(this.tweet);
     }
 
-    download_images(path) {
-        this.fox.action.download_images(this.images, this.tweet, path);
+    download_images(path, cb) {
+        this.fox.action.download_images(this.images, this.tweet, path, cb);
     }
 }
