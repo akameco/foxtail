@@ -38,7 +38,7 @@ fox.add(function (res) {
 
 // reply to words
 fox.add(function (res) {
-    if (res.text === 'ぬるぽ') fox.reply('ガッ');
+    if (res.text === 'ぬるぽ') res.reply('ガッ');
 });
 
 fox.run();
