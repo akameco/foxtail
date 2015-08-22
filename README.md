@@ -33,7 +33,7 @@ var fox = new FoxTail();
 
 // show timeline
 fox.add(function (res) {
-    console.log("@" + res.screen_name + "(" + res.name + ") " + res.text + "\n");
+    console.log("@" + res.screen_name + "(" + res.user_name + ") " + res.text + "\n");
 });
 
 // reply to words
