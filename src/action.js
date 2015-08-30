@@ -38,7 +38,7 @@ export default class Action {
   }
 
   /**
-   * リツートをする
+   * リツイートする
    * @param tweet
    */
   retweet(tweet) {
@@ -61,7 +61,7 @@ export default class Action {
    * @param path
    * @param cb
    */
-  download_images(images, tweet, path, cb) {
+  downloadImages(images, tweet, path, cb) {
     if (images.length === 0) {
       return
     }

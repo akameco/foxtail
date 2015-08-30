@@ -48,7 +48,7 @@ export default class Response {
     this.fox.action.favorite(this.tweet)
   }
 
-  download_images(path, cb) {
-    this.fox.action.download_images(this.images, this.tweet, path, cb)
+  downloadImages(path, cb) {
+    this.fox.action.downloadImages(this.images, this.tweet, path, cb)
   }
 }
