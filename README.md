@@ -1,9 +1,8 @@
 # FoxTail
+みこーん。  
 
-みこーん。
-
-Twitter BOT for node.  
-You can easily add plugin.
+Twitter bot generator for node.js  
+You can easily add plugin to your bot.
 
 ## Installation
 
@@ -11,7 +10,7 @@ You can easily add plugin.
 npm install foxtail
 ```
 
-## Example
+## Easy Example
 
 ### 1. Set keys
 
@@ -24,8 +23,20 @@ $ export ACCESS_TOKEN= ...
 $ export ACCESS_TOKEN_SECRET= ...
 ```
 
+or
+
+```
+fox.setConfig({
+  consumer_key: ...,
+  consumer_secret: ...,
+  access_token: ...,
+  access_token_secret: ...
+});
+```
+
 ### 2. Setup FoxTail.
-main.js
+
+index.js
 
 ```js
 var FoxTail = require('foxtail');
@@ -38,7 +49,7 @@ fox.add(function (res) {
 
 // reply to words
 fox.add(function (res) {
-    if (res.text === 'ぬるぽ') res.reply('ガッ');
+    if (res.text === 'hello') res.reply('world');
 });
 
 fox.run();
@@ -47,14 +58,91 @@ fox.run();
 ### 3. Run
 
 ```
-$ node main.js
+$ node index.js
+```
+
+## Example
+If you want to separate plugins, you can place the plugin file into the plugin folder.
+
+plugin/hello.js
+```js
+module.exports = function (fox) {
+  fox.add(function (res) {
+    if (res.text === 'hello') res.reply('world');
+  });
+};
+```
+
+index.js
+```js
+var FoxTail = require('foxtail');
+var Path = require('path');
+
+let fox = new FoxTail();
+fox.load(Path.resolve(__dirname, 'plugin'));
+fox.run();
+```
+
+Very Easy!
+
+## Response Action
+
+### Tweet
+
+```js
+fox.add(function (res) {
+    if (res.text === 'foo') res.post('bar');
+});
+```
+
+### Reply
+
+```js
+fox.add(function (res) {
+    if (res.text === 'hello') res.reply('world');
+});
+```
+
+### Retweet
+
+```js
+fox.add(function(res) {
+    if (res.screen_name === 'akameco') res.retweet();
+});
+```
+
+### Favolite
+
+```js
+fox.add(function(res) {
+    if (res.text === 'happy') res.favorite();
+});
+```
+
+### Schedule Tweet
+install node-cron
+
+```
+$ npm install cron --save
+```
+
+```js
+var cron = require('cron');
+
+var job = new cron.cronJob('0 0 0 * * *', function () {
+  fox.post('ラーメン...');
+}, null, false);
+
+module.exports = function (fox) {
+  fox.add(function () {
+    job.start();
+  });
+};
 ```
 
 ## Development
 
 ```
-# example
-npm run example
 # watch
 npm run watch
 # build
