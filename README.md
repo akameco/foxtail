@@ -12,35 +12,19 @@ npm install foxtail
 
 ## Easy Example
 
-### 1. Set keys
-
-Set your keys.
-
-```
-$ export CONSUMER_KEY= ...
-$ export CONSUMER_SECRET= ...
-$ export ACCESS_TOKEN= ...
-$ export ACCESS_TOKEN_SECRET= ...
-```
-
-or
-
-```
-fox.setConfig({
-  consumer_key: ...,
-  consumer_secret: ...,
-  access_token: ...,
-  access_token_secret: ...
-});
-```
-
-### 2. Setup FoxTail.
+### 1. Setup FoxTail.
 
 index.js
 
 ```js
 var FoxTail = require('foxtail');
-var fox = new FoxTail();
+
+var fox = new FoxTail({
+    consumer_key: ...,
+    consumer_secret: ...,
+    access_token: ...,
+    access_token_secret: ...
+});
 
 // show timeline
 fox.add(function (res) {
@@ -55,7 +39,7 @@ fox.add(function (res) {
 fox.run();
 ```
 
-### 3. Run
+### 2. Run
 
 ```
 $ node index.js
@@ -78,7 +62,13 @@ index.js
 var FoxTail = require('foxtail');
 var Path = require('path');
 
-let fox = new FoxTail();
+var fox = new FoxTail({
+    consumer_key: ...,
+    consumer_secret: ...,
+    access_token: ...,
+    access_token_secret: ...
+});
+
 fox.load(Path.resolve(__dirname, 'plugin'));
 fox.run();
 ```
@@ -130,7 +120,7 @@ $ npm install cron --save
 var cron = require('cron');
 
 var job = new cron.cronJob('0 0 0 * * *', function () {
-  fox.post('ラーメン...');
+  fox.post('hello');
 }, null, false);
 
 module.exports = function (fox) {
