@@ -104,6 +104,16 @@ export default class FoxTail {
   }
 
   /**
+   * npm プラグインの読み込み
+   */
+  loadNpmScript(path) {
+    let data = require(path)
+    data.forEach(function(script) {
+      require(script)(this)
+    })
+  }
+
+  /**
    * 実行
    */
   run() {
