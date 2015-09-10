@@ -6,15 +6,9 @@ import Action from './action'
 import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline'
 
 export default class FoxTail {
-  /**
-   * プラグインを発火するリスナ
-   * @type {Array}
-   */
-  listeners = []
 
-  /**
-   */
   constructor(config) {
+    this.listeners = []
     this.twitter = new Twitter(config)
     this.action = new Action(this)
     // public タイムラインの決め打ち
@@ -108,7 +102,7 @@ export default class FoxTail {
    */
   loadNpmScript(path) {
     let data = require(path)
-    data.forEach(function(script) {
+    data.forEach((script) => {
       require(script)(this)
     })
   }
