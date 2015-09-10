@@ -1,4 +1,3 @@
-import T from './config'
 import Fs from 'fs'
 import Path from 'path'
 import Request from 'request'
@@ -8,6 +7,7 @@ export default class Action {
 
   constructor(fox) {
     this.fox = fox
+    this.twitter = fox.twitter
   }
 
   /**
@@ -16,10 +16,9 @@ export default class Action {
    * @param msg
    */
   post(msg) {
-    T.post('statuses/update', {
+    this.twitter.post('statuses/update', {
       status: msg
-    }, (err, data) => {
-    })
+    }, () => { })
   }
 
   // 相手にリプライを返す
@@ -30,11 +29,10 @@ export default class Action {
    * @param msg
    */
   reply(tweet, msg) {
-    T.post('statuses/update', {
+    this.twitter.post('statuses/update', {
       in_reply_to_status_id: tweet.id_str,
       status: `@${tweet.user.screen_name} ${msg}`
-    }, (err) => {
-    })
+    }, () => { })
   }
 
   /**
@@ -42,7 +40,7 @@ export default class Action {
    * @param tweet
    */
   retweet(tweet) {
-    T.post('statuses/retweet/:id', {id: tweet.id_str}, ()=> { })
+    this.twitter.post('statuses/retweet/:id', {id: tweet.id_str}, ()=> { })
   }
 
   /**
@@ -50,7 +48,7 @@ export default class Action {
    * @param tweet
    */
   favorite(tweet) {
-    T.post('favorites/create', {id: tweet.id_str}, ()=> { })
+    this.twitter.post('favorites/create', {id: tweet.id_str}, ()=> { })
   }
 
   // TODO 保存する画像のファイル名を任意に設定可能にする
