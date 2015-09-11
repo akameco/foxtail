@@ -75,6 +75,43 @@ fox.run();
 
 Very Easy!
 
+## Using foxtail npm plugins
+If you want to create bot more easily, You can use the npm plugins.  
+
+This is an example.
+First, Install foxtail plugin.
+```
+$ npm install foxtail-hello-world
+```
+
+Add plugin name into json file.
+
+fox.json
+```fox.json
+['foxtail-hello-world']
+```
+
+Add `loadNpmScript` to index.js.
+
+index.js
+```js
+var FoxTail = require('foxtail');
+var Path = require('path');
+
+var fox = new FoxTail({
+    consumer_key: ...,
+    consumer_secret: ...,
+    access_token: ...,
+    access_token_secret: ...
+});
+
+fox.loadNpmScript(Path.resolve(__dirname, 'fox.json'));
+fox.run();
+```
+
+YEAR!!!!  
+This plugin is that reply 'hello' to 'world' in the timeline.   
+
 ## Response Action
 
 ### Tweet
@@ -101,11 +138,11 @@ fox.add(function(res) {
 });
 ```
 
-### Favolite
+### Favorite
 
 ```js
 fox.add(function(res) {
-    if (res.text === 'happy') res.favorite();
+    if (/happy/.test(res.text)) res.favorite();
 });
 ```
 
