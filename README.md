@@ -78,8 +78,10 @@ Very Easy!
 ## Using foxtail npm plugins
 If you want to create bot more easily, You can use the npm plugins.  
 
-This is an example.
+This is an example.  
+This plugin is that reply 'hello' to 'world' in the timeline.  
 First, Install foxtail plugin.
+
 ```
 $ npm install foxtail-hello-world
 ```
@@ -110,7 +112,6 @@ fox.run();
 ```
 
 YEAR!!!!  
-This plugin is that reply 'hello' to 'world' in the timeline.   
 
 ## Response Action
 
