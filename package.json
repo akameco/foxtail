@@ -1,7 +1,7 @@
 {
   "name": "foxtail",
-  "version": "0.1.0",
-  "description": "Twitter BOT for node. You can easily add plugin.",
+  "version": "0.1.1",
+  "description": "Twitter bot generator for node.js. You can easily add plugin.",
   "author": "akameco",
   "keywords": [
     "twitter",
