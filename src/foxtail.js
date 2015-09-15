@@ -3,7 +3,7 @@ import Path from 'path'
 import Twitter from 'twit'
 import Listener from './listener'
 import Action from './action'
-import {StreamingListTimeLine,ListTimeLine,PublicTimeLine} from './timeline'
+import {PublicTimeLine} from './timeline'
 
 export default class FoxTail {
 
@@ -11,9 +11,7 @@ export default class FoxTail {
     this.listeners = []
     this.twitter = new Twitter(config)
     this.action = new Action(this)
-    // public タイムラインの決め打ち
-    // 他のタイムラインを使う場合のみメソッドを読んで変更する
-    this.setTimeline('public')
+    this.setTimeline(PublicTimeLine)
   }
 
   get twit() {
@@ -26,13 +24,8 @@ export default class FoxTail {
    * @param options
    * @private
    */
-  setTimeline(timeline, options) {
-    let timelineTable = {
-      'public': PublicTimeLine,
-      'list': StreamingListTimeLine,
-      'rest/list': ListTimeLine
-    }
-    this.timeline = new timelineTable[timeline](this, options)
+  setTimeline(timelineClass, options) {
+    this.timeline = new timelineClass(this, options)
   }
 
   /**
