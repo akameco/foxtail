@@ -1,6 +1,3 @@
-// レスポンスクラス
-// イベントが発生すると作られる
-
 export default class Response {
 
   constructor(fox, tweet) {
@@ -8,7 +5,6 @@ export default class Response {
     this.tweet = tweet
   }
 
-  // 頻繁に利用されるオブジェクトは直接取得できるようにする
   get user_name() {
     return this.tweet.user.name
   }
