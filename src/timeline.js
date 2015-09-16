@@ -24,17 +24,17 @@ export class ListTimeLine extends TimeLine {
   }
 
   run() {
-    this.twitter.get('lists/statuses',
-          {list_id: this.list_id, count: this.count}, (err, data) => {
-            if (err) {
-              throw new Error(err)
-            }
+    this.twitter.get('lists/statuses', {
+      list_id: this.list_id,
+      count: this.count
+    }, (err, data) => {
+      if (err) throw new Error(err)
 
-            for (let tweet of data) {
-              if (!this.filter(tweet)) continue
-              this.fox.receive(tweet)
-            }
-          })
+      for (let tweet of data) {
+        if (!this.filter(tweet)) continue
+          this.fox.receive(tweet)
+      }
+    })
   }
 }
 
@@ -44,7 +44,6 @@ export class StreamingListTimeLine extends TimeLine {
     this.list_id = list_id
   }
 
-  // TODO: ネストを浅くする
   run() {
     this.twitter.get('lists/members', {list_id: this.list_id, count: 5000}, (err, data) => {
       let user_ids = data.users.map((user) => {
