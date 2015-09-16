@@ -69,8 +69,6 @@ node_modules
 
 .idea/
 .envrc
-bundle.js
-ignore/
-src/img/
 img/
 lib/
+example/
