@@ -66,10 +66,7 @@ export class PublicTimeLine extends TimeLine {
   run() {
     let userStream = this.twitter.stream('user')
     userStream.on('tweet', (tweet) => {
-      // RTされたツイート及び画像のないツイートを取り除く
-      //if (this.filter(tweet)) {
       this.fox.receive(tweet)
-      //}
     })
   }
 }
