@@ -1,8 +1,3 @@
-import Fs from 'fs'
-import Path from 'path'
-import Request from 'request'
-import Url from 'url'
-
 export default class Action {
 
   constructor(fox) {
@@ -49,31 +44,5 @@ export default class Action {
    */
   favorite(tweet) {
     this.twitter.post('favorites/create', {id: tweet.id_str}, ()=> { })
-  }
-
-  // TODO 保存する画像のファイル名を任意に設定可能にする
-  /**
-   * 対象のパスに画像を保存する
-   * @param images
-   * @param tweet
-   * @param path
-   * @param cb
-   */
-  downloadImages(images, tweet, path, cb) {
-    if (images.length === 0) {
-      return
-    }
-
-    for (let image_url of images) {
-      let filename = Path.basename(Url.parse(image_url).pathname)
-      let savePath = Path.join(path, filename)
-      Request(image_url)
-      .pipe(Fs.createWriteStream(savePath))
-      .on('close', ()=> {
-        if (typeof cb === 'function') {
-          cb(savePath)
-        }
-      })
-    }
   }
 }
