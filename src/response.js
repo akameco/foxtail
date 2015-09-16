@@ -1,3 +1,6 @@
+// レスポンスクラス
+// イベントが発生すると作られる
+
 export default class Response {
 
   constructor(fox, tweet) {
@@ -43,5 +46,9 @@ export default class Response {
 
   favorite() {
     this.fox.action.favorite(this.tweet)
+  }
+
+  downloadImages(path, cb) {
+    this.fox.action.downloadImages(this.images, this.tweet, path, cb)
   }
 }
