@@ -78,10 +78,10 @@ export default class FoxTail {
    * @param file
    */
   loadScript(path, file) {
-    let ext = Path.extname(file)
-    let full = Path.join(path, Path.basename(file, ext))
+    const ext = Path.extname(file)
+    const full = Path.join(path, Path.basename(file, ext))
     try {
-      let script = require(full)
+      const script = require(full)
       if (typeof script === 'function') {
         script(this)
       }
@@ -94,7 +94,7 @@ export default class FoxTail {
    * npm プラグインの読み込み
    */
   loadNpmScript(path) {
-    let data = require(path)
+    const data = require(path)
     data.forEach((script) => {
       require(script)(this)
     })

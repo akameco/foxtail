@@ -22,7 +22,7 @@ export default class Response {
   }
 
   get images() {
-    let images = []
+    const images = []
     // 複数画像
     if (this.tweet.extended_entities) {
       for (let m of this.tweet.extended_entities.media) {
