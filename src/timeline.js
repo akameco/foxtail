@@ -46,11 +46,11 @@ export class StreamingListTimeLine extends TimeLine {
 
   run() {
     this.twitter.get('lists/members', {list_id: this.list_id, count: 5000}, (err, data) => {
-      let user_ids = data.users.map((user) => {
+      const user_ids = data.users.map((user) => {
         return user.id
       })
 
-      let userStream = this.twitter.stream('statuses/filter', {follow: user_ids.join()})
+      const userStream = this.twitter.stream('statuses/filter', {follow: user_ids.join()})
 
       userStream.on('tweet', (tweet) => {
         // RTされたツイート及び画像のないツイートを取り除く
@@ -64,7 +64,7 @@ export class StreamingListTimeLine extends TimeLine {
 
 export class PublicTimeLine extends TimeLine {
   run() {
-    let userStream = this.twitter.stream('user')
+    const userStream = this.twitter.stream('user')
     userStream.on('tweet', (tweet) => {
       this.fox.receive(tweet)
     })
