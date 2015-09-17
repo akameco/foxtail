@@ -7,13 +7,7 @@ export class TimeLine extends EventEmitter {
     this.twitter = this.fox.twitter
   }
 
-  // 画像のないツイートを取り除く
-  filter(tweet) {
-    return tweet.extended_entities ? true : false
-  }
-
-  run() {
-  }
+  run() { }
 }
 
 export class ListTimeLine extends TimeLine {
@@ -31,8 +25,7 @@ export class ListTimeLine extends TimeLine {
       if (err) throw new Error(err)
 
       for (let tweet of data) {
-        if (!this.filter(tweet)) continue
-          this.fox.receive(tweet)
+        this.fox.receive(tweet)
       }
     })
   }
@@ -53,8 +46,7 @@ export class StreamingListTimeLine extends TimeLine {
       const userStream = this.twitter.stream('statuses/filter', {follow: user_ids.join()})
 
       userStream.on('tweet', (tweet) => {
-        // RTされたツイート及び画像のないツイートを取り除く
-        if (this.filter(tweet) && user_ids.indexOf(tweet.user.id) !== -1) {
+        if (user_ids.indexOf(tweet.user.id) !== -1) {
           this.fox.receive(tweet)
         }
       })
