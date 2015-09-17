@@ -17,17 +17,6 @@ export default class Response {
     return this.tweet.text
   }
 
-  get images() {
-    let images = []
-    // 複数画像
-    if (this.tweet.extended_entities) {
-      for (let m of this.tweet.extended_entities.media) {
-        images.push(m.media_url)
-      }
-    }
-    return images
-  }
-
   post(msg) {
     this.fox.action.post(msg)
   }
