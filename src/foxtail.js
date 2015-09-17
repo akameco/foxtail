@@ -1,9 +1,16 @@
 import Fs from 'fs'
 import Path from 'path'
 import Twitter from 'twit'
+import winston from 'winston'
 import Listener from './listener'
 import Action from './action'
 import {PublicTimeLine} from './timeline'
+
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({ colorize: true })
+  ]
+})
 
 export default class FoxTail {
 
@@ -67,7 +74,7 @@ export default class FoxTail {
         }
       })
     } else {
-      console.log('Could not read file')
+      logger.warn('Could not read plugin file')
       process.exit(1)
     }
   }
@@ -86,7 +93,8 @@ export default class FoxTail {
         script(this)
       }
     } catch (e) {
-      console.log('Error' + e)
+      logger.error(e)
+      process.exit(1)
     }
   }
 
