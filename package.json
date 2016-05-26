@@ -29,7 +29,7 @@
     "winston": "^1.0.1"
   },
   "devDependencies": {
-    "babel": "^5.8.21",
+    "babel": "^6.3.26",
     "eslint": "^1.2.1"
   }
 }
