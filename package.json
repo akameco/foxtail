@@ -30,6 +30,6 @@
   },
   "devDependencies": {
     "babel": "^5.8.21",
-    "eslint": "^1.2.1"
+    "eslint": "^2.13.0"
   }
 }
