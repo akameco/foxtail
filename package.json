@@ -20,7 +20,7 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps inline",
     "watch": "babel src --out-dir lib --watch --source-maps inline",
-    "test": "mocha test/**/*.js",
+    "test": "xo",
     "example": "node example/index.js"
   },
   "dependencies": {
@@ -30,6 +30,6 @@
   },
   "devDependencies": {
     "babel": "^5.8.21",
-    "eslint": "^1.2.1"
+    "xo": "^0.16.0"
   }
 }
