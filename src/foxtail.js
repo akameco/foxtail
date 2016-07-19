@@ -1,11 +1,12 @@
-import Fs from 'fs';
-import Path from 'path';
-import Twitter from 'twit';
-import Listener from './listener';
-import Action from './action';
-import {PublicTimeLine} from './timeline';
+'use strict';
+const Fs = require('fs');
+const Path = require('path');
+const Twitter = require('twit');
+const Listener = require('./listener');
+const Action = require('./action');
+const {PublicTimeLine} = require('./timeline');
 
-export default class FoxTail {
+class FoxTail {
 	constructor(config) {
 		this.listeners = [];
 		this.twitter = new Twitter(config);
@@ -48,7 +49,7 @@ export default class FoxTail {
 	 * @param tweet
 	 */
 	receive(tweet) {
-		for (let listener of this.listeners) {
+		for (const listener of this.listeners) {
 			listener.call(tweet);
 		}
 	}
@@ -63,7 +64,7 @@ export default class FoxTail {
 				if (err) {
 					throw new Error(err);
 				}
-				for (let file of list) {
+				for (const file of list) {
 					this.loadScript(path, file);
 				}
 			});
@@ -104,3 +105,5 @@ export default class FoxTail {
 		this.timeline.run();
 	}
 }
+
+module.exports = FoxTail;

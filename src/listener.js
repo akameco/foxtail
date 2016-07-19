@@ -1,6 +1,7 @@
-import Response from './response';
+'use strict';
+const Response = require('./response');
 
-export default class Listener {
+class Listener {
 	constructor(fox, cb) {
 		this.fox = fox;
 		this.cb = cb;
@@ -10,3 +11,5 @@ export default class Listener {
 		this.cb(new Response(this.fox, tweet));
 	}
 }
+
+module.exports = Listener;

@@ -2,7 +2,15 @@
   "name": "foxtail",
   "version": "0.2.0",
   "description": "Twitter bot generator for node.js. You can easily add plugin.",
-  "author": "akameco",
+  "license": "MIT",
+  "author": {
+    "name": "akameco",
+    "email": "akameco.t@gmail.com",
+    "url": "akameco.github.io"
+  },
+  "engines": {
+    "node": ">=4"
+  },
   "keywords": [
     "twitter",
     "streaming"
@@ -13,23 +21,23 @@
     "type": "git",
     "url": "https://github.com/akameco/foxtail.git"
   },
-  "main": "lib/foxtail.js",
+  "main": "index.js",
   "files": [
-    "lib"
+    "index.js",
+    "src/"
   ],
   "scripts": {
-    "build": "babel src --out-dir lib --source-maps inline",
-    "watch": "babel src --out-dir lib --watch --source-maps inline",
     "test": "xo",
     "example": "node example/index.js"
   },
   "dependencies": {
-    "request": "^2.60.0",
-    "twit": "^2.1.0",
-    "winston": "^1.0.1"
+    "request": "^2.73.0",
+    "twit": "^2.2.4"
   },
   "devDependencies": {
-    "babel": "^5.8.21",
     "xo": "^0.16.0"
+  },
+  "xo": {
+    "esnext": true
   }
 }
