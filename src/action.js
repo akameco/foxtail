@@ -1,4 +1,6 @@
-export default class Action {
+'use strict';
+
+class Action {
 	constructor(fox) {
 		this.fox = fox;
 		this.twitter = fox.twitter;
@@ -44,3 +46,5 @@ export default class Action {
 		this.twitter.post('favorites/create', {id: tweet.id_str}, () => { });
 	}
 }
+
+module.exports = Action;

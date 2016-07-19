@@ -1,5 +1,6 @@
-export default class Response {
+'use strict';
 
+class Response {
 	constructor(fox, tweet) {
 		this.fox = fox;
 		this.tweet = tweet;
@@ -33,3 +34,5 @@ export default class Response {
 		this.fox.action.favorite(this.tweet);
 	}
 }
+
+module.exports = Response;
