@@ -17,9 +17,9 @@ npm install foxtail
 index.js
 
 ```js
-var FoxTail = require('foxtail');
+const FoxTail = require('foxtail');
 
-var fox = new FoxTail({
+const fox = new FoxTail({
     consumer_key: ...,
     consumer_secret: ...,
     access_token: ...,
@@ -27,12 +27,12 @@ var fox = new FoxTail({
 });
 
 // show timeline
-fox.add(function (res) {
+fox.add(res => {
     console.log("@" + res.screen_name + "(" + res.user_name + ") " + res.text + "\n");
 });
 
 // reply to words
-fox.add(function (res) {
+fox.add(res => {
     if (res.text === 'hello') res.reply('world');
 });
 
@@ -50,26 +50,28 @@ If you want to separate plugins, you can place the plugin file into the plugin f
 
 plugin/hello.js
 ```js
-module.exports = function (fox) {
-  fox.add(function (res) {
-    if (res.text === 'hello') res.reply('world');
+module.exports = fox => {
+  fox.add(res => {
+    if (res.text === 'hello') {
+      res.reply('world');
+    }
   });
 };
 ```
 
 index.js
 ```js
-var FoxTail = require('foxtail');
-var Path = require('path');
+const FoxTail = require('foxtail');
+const path = require('path');
 
-var fox = new FoxTail({
+const fox = new FoxTail({
     consumer_key: ...,
     consumer_secret: ...,
     access_token: ...,
     access_token_secret: ...
 });
 
-fox.load(Path.resolve(__dirname, 'plugin'));
+fox.load(path.resolve(__dirname, 'plugin'));
 fox.run();
 ```
 
@@ -97,10 +99,10 @@ Add `loadNpmScript` to index.js.
 
 index.js
 ```js
-var FoxTail = require('foxtail');
-var Path = require('path');
+const FoxTail = require('foxtail');
+const Path = require('path');
 
-var fox = new FoxTail({
+const fox = new FoxTail({
     consumer_key: ...,
     consumer_secret: ...,
     access_token: ...,
@@ -118,32 +120,40 @@ YEAR!!!!
 ### Tweet
 
 ```js
-fox.add(function (res) {
-    if (res.text === 'foo') res.post('bar');
+fox.add(res => {
+    if (res.text === 'foo') {
+      res.post('bar');
+    }
 });
 ```
 
 ### Reply
 
 ```js
-fox.add(function (res) {
-    if (res.text === 'hello') res.reply('world');
+fox.add(res => {
+    if (res.text === 'hello') {
+      res.reply('world');
+    }
 });
 ```
 
 ### Retweet
 
 ```js
-fox.add(function(res) {
-    if (res.screen_name === 'akameco') res.retweet();
+fox.add(res => {
+    if (res.screen_name === 'akameco') {
+      res.retweet();
+    }
 });
 ```
 
 ### Favorite
 
 ```js
-fox.add(function(res) {
-    if (/happy/.test(res.text)) res.favorite();
+fox.add(res => {
+    if (/happy/.test(res.text)) {
+      res.favorite();
+    }
 });
 ```
 
@@ -155,14 +165,14 @@ $ npm install cron --save
 ```
 
 ```js
-var cron = require('cron');
+const cron = require('cron');
 
-var job = new cron.cronJob('0 0 0 * * *', function () {
+const job = new cron.cronJob('0 0 0 * * *', () => {
   fox.post('hello');
 }, null, false);
 
-module.exports = function (fox) {
-  fox.add(function () {
+module.exports = fox => {
+  fox.add(() => {
     job.start();
   });
 };
