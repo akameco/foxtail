@@ -15,7 +15,6 @@
     "twitter",
     "streaming"
   ],
-  "license": "MIT",
   "homepage": "https://github.com/akameco/foxtail",
   "repository": {
     "type": "git",
@@ -31,7 +30,7 @@
     "example": "node example/index.js"
   },
   "dependencies": {
-    "request": "^2.73.0",
+    "request": "^2.74.0",
     "twit": "^2.2.4"
   },
   "devDependencies": {
