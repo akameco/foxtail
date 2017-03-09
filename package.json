@@ -31,7 +31,7 @@
     "example": "node example/index.js"
   },
   "dependencies": {
-    "request": "^2.78.0",
+    "request": "^2.81.0",
     "twit": "^2.2.4"
   },
   "devDependencies": {
