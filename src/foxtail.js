@@ -92,7 +92,7 @@ class FoxTail {
 	}
 
 	/**
-	 * npm プラグインの読み込み
+	 * プラグインの読み込み
 	 */
 	loadNpmScript(path) {
 		const data = require(path);

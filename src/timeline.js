@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {EventEmitter} from 'events';
 
 export class TimeLine extends EventEmitter {
@@ -22,9 +23,11 @@ export class ListTimeLine extends TimeLine {
 			list_id: this.list_id,
 			count: this.count
 		}, (err, data) => {
-			if (err) throw new Error(err);
+			if (err) {
+				throw new Error(err);
+			}
 
-			for (let tweet of data) {
+			for (const tweet of data) {
 				this.fox.receive(tweet);
 			}
 		});
@@ -38,7 +41,7 @@ export class StreamingListTimeLine extends TimeLine {
 	}
 
 	run() {
-		this.twitter.get('lists/members', {list_id: this.list_id, count: 5000}, (err, data) => {
+		this.twitter.get('lists/members', {list_id: this.list_id, count: 5000}, (_, data) => {
 			const user_ids = data.users.map(user => {
 				return user.id;
 			});
