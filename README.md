@@ -1,4 +1,6 @@
 # FoxTail
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/akameco/foxtail.svg)](https://greenkeeper.io/)
 みこーん。  
 
 Twitter bot generator for node.js  
